@@ -1,0 +1,1369 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>奥特普 AI 落地外部咨询汇报方案</title>
+  <style>
+    :root {
+      --paper: #fbfaf7;
+      --surface: #ffffff;
+      --ink: #1d2430;
+      --muted: #667085;
+      --line: #d9dee7;
+      --blue: #245b8f;
+      --teal: #2f7f73;
+      --red: #b54837;
+      --gold: #b48332;
+      --green: #4d7b39;
+      --shadow: 0 16px 48px rgba(29, 36, 48, 0.10);
+      --radius: 8px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(36, 91, 143, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(36, 91, 143, 0.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 28px 28px;
+      font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(217, 222, 231, 0.86);
+      background: rgba(251, 250, 247, 0.92);
+      backdrop-filter: blur(16px);
+    }
+
+    .topbar-inner {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--ink);
+      display: grid;
+      place-items: center;
+      font-family: Georgia, serif;
+      font-weight: 700;
+      background: var(--surface);
+      box-shadow: 4px 4px 0 var(--gold);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    nav a {
+      padding: 8px 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    nav a:hover {
+      color: var(--ink);
+      border-bottom-color: var(--gold);
+    }
+
+    main {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: calc(100vh - 62px);
+      padding: 76px 0 38px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+      gap: 54px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--blue);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 820px;
+      font-size: clamp(42px, 7.5vw, 88px);
+      line-height: 0.98;
+      letter-spacing: 0;
+      font-weight: 900;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: 0;
+      font-weight: 900;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .lead {
+      margin-top: 26px;
+      max-width: 700px;
+      color: #374151;
+      font-size: 20px;
+      line-height: 1.78;
+    }
+
+    .thesis {
+      margin-top: 30px;
+      padding: 22px 24px;
+      border-left: 6px solid var(--red);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      font-size: 22px;
+      line-height: 1.55;
+      font-weight: 800;
+    }
+
+    .hero-meta {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .meta-chip {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      padding: 8px 12px;
+      border-radius: 999px;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 560px;
+      padding: 28px;
+      border: 1px solid var(--ink);
+      background: var(--surface);
+      box-shadow: 12px 12px 0 rgba(36, 91, 143, 0.18);
+      overflow: hidden;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, transparent 0 58%, rgba(180, 131, 50, 0.14) 58% 61%, transparent 61%),
+        radial-gradient(circle at 18% 16%, rgba(181, 72, 55, 0.12), transparent 25%),
+        radial-gradient(circle at 82% 86%, rgba(47, 127, 115, 0.12), transparent 24%);
+      pointer-events: none;
+    }
+
+    .visual-title {
+      position: relative;
+      margin-bottom: 24px;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--muted);
+    }
+
+    .loop {
+      position: relative;
+      display: grid;
+      gap: 14px;
+    }
+
+    .loop-row {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .loop-label {
+      display: grid;
+      place-items: center;
+      padding: 14px 8px;
+      border: 1px solid var(--line);
+      background: rgba(251, 250, 247, 0.9);
+      color: var(--muted);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .loop-value {
+      padding: 16px 18px;
+      border: 1px solid var(--ink);
+      background: rgba(255, 255, 255, 0.92);
+      font-weight: 800;
+      box-shadow: 5px 5px 0 rgba(29, 36, 48, 0.06);
+    }
+
+    .loop-value small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .visual-bottom {
+      position: relative;
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .mini-metric {
+      padding: 14px 12px;
+      border: 1px solid var(--line);
+      background: rgba(251, 250, 247, 0.92);
+      min-height: 96px;
+    }
+
+    .mini-metric strong {
+      display: block;
+      font-size: 30px;
+      line-height: 1;
+      font-family: Georgia, serif;
+      color: var(--blue);
+    }
+
+    .mini-metric span {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    section {
+      padding: 74px 0;
+      border-top: 1px solid rgba(217, 222, 231, 0.8);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(300px, 1.2fr);
+      gap: 42px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .section-head p {
+      color: #4b5563;
+      font-size: 18px;
+      line-height: 1.78;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid.six {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.88);
+      padding: 24px;
+      box-shadow: 0 8px 28px rgba(29, 36, 48, 0.06);
+    }
+
+    .card.emphasis {
+      border-color: var(--ink);
+      box-shadow: 8px 8px 0 rgba(181, 72, 55, 0.16);
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+    }
+
+    .card p,
+    .card li {
+      color: #4b5563;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 15px;
+      line-height: 1.72;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 12px;
+      color: var(--blue);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .tag::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    .pain-list {
+      counter-reset: pain;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .pain-item {
+      position: relative;
+      min-height: 184px;
+      padding: 18px 14px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .pain-item::before {
+      counter-increment: pain;
+      content: "0" counter(pain);
+      color: var(--red);
+      font-family: Georgia, serif;
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .pain-item strong {
+      margin-top: 18px;
+      display: block;
+      font-size: 17px;
+      line-height: 1.32;
+    }
+
+    .pain-item span {
+      display: block;
+      margin-top: 12px;
+      color: var(--muted);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .project-board {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.95fr) minmax(0, 1.05fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .project-principle {
+      border: 1px solid var(--ink);
+      background: var(--surface);
+      padding: 30px;
+      box-shadow: 9px 9px 0 rgba(181, 72, 55, 0.14);
+    }
+
+    .project-principle h3 {
+      font-size: 31px;
+      line-height: 1.16;
+      margin-bottom: 18px;
+    }
+
+    .project-principle p {
+      color: #4b5563;
+      font-size: 18px;
+      line-height: 1.78;
+    }
+
+    .project-kpi {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .kpi-box {
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: rgba(251, 250, 247, 0.96);
+      min-height: 112px;
+    }
+
+    .kpi-box strong {
+      display: block;
+      color: var(--blue);
+      font-family: Georgia, serif;
+      font-size: 34px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .kpi-box span {
+      color: var(--muted);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .ledger {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.9);
+      overflow: hidden;
+    }
+
+    .ledger-row {
+      display: grid;
+      grid-template-columns: 1.2fr 0.72fr 0.72fr 0.72fr 1fr;
+      min-height: 72px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .ledger-row:last-child {
+      border-bottom: 0;
+    }
+
+    .ledger-row > div {
+      padding: 16px 14px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      color: #4b5563;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .ledger-row > div:last-child {
+      border-right: 0;
+    }
+
+    .ledger-head > div {
+      min-height: 58px;
+      background: var(--ink);
+      color: white;
+      font-weight: 800;
+    }
+
+    .ledger-row strong {
+      color: var(--ink);
+      font-family: "Noto Serif SC", "Songti SC", serif;
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .gap-red {
+      color: var(--red) !important;
+      font-weight: 800;
+    }
+
+    .gap-green {
+      color: var(--green) !important;
+      font-weight: 800;
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .layers {
+      display: grid;
+      gap: 14px;
+    }
+
+    .layer {
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 18px;
+      border: 1px solid var(--ink);
+      background: var(--surface);
+      box-shadow: 6px 6px 0 rgba(47, 127, 115, 0.13);
+    }
+
+    .layer-num {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--ink);
+      color: white;
+      font-family: Georgia, serif;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .layer h3 {
+      margin-bottom: 4px;
+      font-size: 20px;
+    }
+
+    .layer p {
+      color: var(--muted);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+    }
+
+    .venn {
+      min-height: 420px;
+      position: relative;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.74);
+      overflow: hidden;
+    }
+
+    .circle {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      padding: 34px;
+      text-align: center;
+      font-weight: 900;
+      color: var(--ink);
+      border: 1px solid rgba(29, 36, 48, 0.16);
+      font-size: 22px;
+      line-height: 1.28;
+    }
+
+    .circle small {
+      display: block;
+      margin-top: 8px;
+      color: #4b5563;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    .c1 { left: 28px; top: 44px; background: rgba(36, 91, 143, 0.15); }
+    .c2 { right: 28px; top: 44px; background: rgba(47, 127, 115, 0.15); }
+    .c3 { left: 50%; bottom: 38px; transform: translateX(-50%); background: rgba(180, 131, 50, 0.18); }
+
+    .scenario {
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .scenario .num {
+      color: var(--red);
+      font-family: Georgia, serif;
+      font-size: 36px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .scenario h3 {
+      margin: 18px 0 12px;
+      font-size: 21px;
+    }
+
+    .flow {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .flow span {
+      padding: 8px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+    }
+
+    .culture {
+      display: grid;
+      grid-template-columns: 0.88fr 1.12fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .dual {
+      display: grid;
+      gap: 18px;
+    }
+
+    .dual-card {
+      padding: 28px;
+      border: 1px solid var(--ink);
+      background: var(--surface);
+      min-height: 216px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dual-card::after {
+      content: "";
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      right: -34px;
+      bottom: -42px;
+      border-radius: 50%;
+      background: rgba(36, 91, 143, 0.10);
+    }
+
+    .dual-card.bottom::after {
+      background: rgba(181, 72, 55, 0.11);
+    }
+
+    .dual-card h3 {
+      margin-bottom: 14px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 16px;
+      align-items: center;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .step b {
+      color: var(--blue);
+      font-family: Georgia, serif;
+      font-size: 26px;
+      line-height: 1;
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 17px;
+    }
+
+    .step span {
+      color: var(--muted);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+    }
+
+    .roadmap {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .phase {
+      position: relative;
+      padding: 24px 20px;
+      border: 1px solid var(--ink);
+      background: var(--surface);
+      min-height: 360px;
+    }
+
+    .phase::before {
+      content: "";
+      position: absolute;
+      top: 43px;
+      left: 20px;
+      right: 20px;
+      height: 4px;
+      background: var(--line);
+    }
+
+    .phase .dot {
+      position: relative;
+      z-index: 1;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: var(--ink);
+      font-family: Georgia, serif;
+      font-weight: 900;
+    }
+
+    .phase h3 {
+      margin-top: 24px;
+      font-size: 20px;
+    }
+
+    .phase time {
+      display: block;
+      margin-top: 8px;
+      color: var(--red);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .phase ul,
+    .decision ul,
+    .risk ul {
+      margin: 16px 0 0;
+      padding-left: 18px;
+    }
+
+    .phase li,
+    .decision li,
+    .risk li {
+      margin: 8px 0;
+      color: #4b5563;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      line-height: 1.62;
+    }
+
+    .decision {
+      min-height: 200px;
+      border-left: 5px solid var(--blue);
+    }
+
+    .decision:nth-child(2) { border-left-color: var(--teal); }
+    .decision:nth-child(3) { border-left-color: var(--gold); }
+    .decision:nth-child(4) { border-left-color: var(--red); }
+    .decision:nth-child(5) { border-left-color: var(--green); }
+    .decision:nth-child(6) { border-left-color: var(--ink); }
+
+    .risk {
+      min-height: 190px;
+      background: linear-gradient(180deg, #fff 0%, rgba(251, 250, 247, 0.95) 100%);
+    }
+
+    .risk h3 {
+      color: var(--red);
+    }
+
+    .closing {
+      padding: 80px 0 100px;
+    }
+
+    .closing-panel {
+      padding: 42px;
+      border: 1px solid var(--ink);
+      background: var(--surface);
+      box-shadow: 12px 12px 0 rgba(36, 91, 143, 0.14);
+    }
+
+    .closing-panel h2 {
+      max-width: 980px;
+    }
+
+    .closing-panel .thesis {
+      box-shadow: none;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--red);
+      margin-top: 28px;
+      font-size: 24px;
+    }
+
+    .footer-note {
+      margin-top: 26px;
+      color: var(--muted);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+    }
+
+    .print-button {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 30;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: white;
+      border-radius: 999px;
+      padding: 12px 16px;
+      cursor: pointer;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-weight: 800;
+      box-shadow: 0 8px 24px rgba(29, 36, 48, 0.22);
+    }
+
+    .print-button:hover {
+      background: var(--blue);
+    }
+
+    @media (max-width: 1040px) {
+      nav { display: none; }
+      .hero,
+      .section-head,
+      .architecture,
+      .culture,
+      .project-board {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        min-height: auto;
+      }
+      .pain-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .ledger {
+        overflow-x: auto;
+      }
+      .ledger-row {
+        min-width: 820px;
+      }
+      .grid.three,
+      .grid.six,
+      .roadmap {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .hero-visual {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 700px) {
+      main,
+      .topbar-inner {
+        width: min(100% - 26px, var(--max));
+      }
+      .brand {
+        white-space: normal;
+      }
+      .hero {
+        padding-top: 44px;
+        gap: 32px;
+      }
+      h1 {
+        font-size: 44px;
+      }
+      .lead,
+      .thesis {
+        font-size: 17px;
+      }
+      .hero-visual {
+        padding: 18px;
+        min-height: auto;
+        box-shadow: 7px 7px 0 rgba(36, 91, 143, 0.18);
+      }
+      .loop-row {
+        grid-template-columns: 1fr;
+      }
+      .visual-bottom {
+        grid-template-columns: 1fr;
+      }
+      .pain-list,
+      .grid.two,
+      .grid.three,
+      .grid.six,
+      .roadmap {
+        grid-template-columns: 1fr;
+      }
+      .project-kpi {
+        grid-template-columns: 1fr;
+      }
+      .circle {
+        position: static;
+        transform: none;
+        width: auto;
+        height: auto;
+        border-radius: var(--radius);
+        margin: 12px;
+      }
+      .venn {
+        display: grid;
+        gap: 0;
+        min-height: auto;
+        padding: 10px 0;
+      }
+      .flow {
+        grid-template-columns: 1fr;
+      }
+      .closing-panel {
+        padding: 26px;
+      }
+      .print-button {
+        display: none;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+      .topbar,
+      .print-button {
+        display: none;
+      }
+      main {
+        width: 100%;
+      }
+      section,
+      .hero,
+      .closing {
+        padding: 30px 0;
+        break-inside: avoid;
+      }
+      .card,
+      .phase,
+      .hero-visual,
+      .closing-panel {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <span class="mark">A</span>
+        <span>奥特普 AI 落地咨询报告</span>
+      </a>
+      <nav aria-label="章节导航">
+        <a href="#diagnosis">诊断</a>
+        <a href="#project-ledger">项目制</a>
+        <a href="#architecture">架构</a>
+        <a href="#scenes">场景</a>
+        <a href="#culture">组织</a>
+        <a href="#roadmap">路线</a>
+        <a href="#decisions">决策</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="report-title">
+      <div>
+        <p class="eyebrow">External Consulting Brief · 2026-06-25</p>
+        <h1 id="report-title">以项目制驱动责任，用 AI 看清每个项目经营结果</h1>
+        <p class="lead">本报告面向奥特普董事长汇报。外部咨询判断：奥特普当前真正要补的不是单点 AI 能力，而是以项目为最小经营单元，看清每个项目预算、实际成本、项目毛利和 gap 责任。</p>
+        <div class="thesis">AI 只是加速器，核心抓手是项目制经营台账；真正要改的是数据口径、责任机制和经营会打法。</div>
+        <div class="hero-meta" aria-label="报告元信息">
+          <span class="meta-chip">汇报对象：董事长</span>
+          <span class="meta-chip">定位：外部咨询建议</span>
+          <span class="meta-chip">风格：诊断 + 路线 + 决策点</span>
+        </div>
+      </div>
+
+      <aside class="hero-visual" aria-label="经营闭环示意">
+        <div class="visual-title">建议形成的项目制经营闭环</div>
+        <div class="loop">
+          <div class="loop-row">
+            <div class="loop-label">项目基线</div>
+            <div class="loop-value">客户机会 / 销售预测 / 报价冻结 / 标准 BOM / 项目预算 <small>每个项目先有预算、报价和 BOM 基准</small></div>
+          </div>
+          <div class="loop-row">
+            <div class="loop-label">项目事实</div>
+            <div class="loop-value">订单 / 出货 / 采购 / 库存 / 退货 / 开票 / 实际成本 <small>AI 串联各系统数据，还原项目真实经营结果</small></div>
+          </div>
+          <div class="loop-row">
+            <div class="loop-label">项目分析</div>
+            <div class="loop-value">预算 vs 实际 / 项目毛利 / 成本 gap / 责任归因 <small>项目预算和项目毛利必须清晰可追踪</small></div>
+          </div>
+          <div class="loop-row">
+            <div class="loop-label">责任闭环</div>
+            <div class="loop-value">经营会 / 责任人 / 决议跟踪 / 报价与 BOM 修正 <small>从部门解释，转为按项目看事实、看差异、看行动</small></div>
+          </div>
+        </div>
+        <div class="visual-bottom">
+          <div class="mini-metric"><strong>1</strong><span>以项目为最小经营单元</span></div>
+          <div class="mini-metric"><strong>4</strong><span>预算、成本、毛利、责任同步看</span></div>
+          <div class="mini-metric"><strong>90</strong><span>天内跑通项目经营样板</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="diagnosis">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">01 · Diagnosis</p>
+          <h2>痛点不是散点问题，而是每个项目经营结果看不清</h2>
+        </div>
+        <p>销售、报价、供应链、财务、项目和系统端的痛点，表面分散，底层其实指向同一个问题：没有以项目为最小经营单元，把预算、实际成本、毛利、gap 来源和责任动作串起来。</p>
+      </div>
+      <div class="pain-list" aria-label="八个核心痛点">
+        <div class="pain-item"><strong>项目毛利不清</strong><span>项目到底赚不赚钱、毛利被哪些成本吃掉，无法稳定追踪。</span></div>
+        <div class="pain-item"><strong>项目预算不清</strong><span>报价冻结、预算成本和实际发生没有形成统一基线。</span></div>
+        <div class="pain-item"><strong>预测 gap 大</strong><span>预测与实际需求缺少持续复盘和收敛机制。</span></div>
+        <div class="pain-item"><strong>报价 gap 大</strong><span>报价能做出来，但报价与实际成本差异没有沉淀。</span></div>
+        <div class="pain-item"><strong>BOM 不成资产</strong><span>品牌、房型、SKU、标准用量和替代关系维护不足。</span></div>
+        <div class="pain-item"><strong>谈价缺数据</strong><span>月度出货、SKU 趋势和未来需求无法支撑供应商谈判。</span></div>
+        <div class="pain-item"><strong>退货开票重</strong><span>高频事务靠人工整理，耗时且容易出错。</span></div>
+        <div class="pain-item"><strong>系统未闭环</strong><span>飞书、清流、老 ERP 与项目经营动作未形成统一链路。</span></div>
+      </div>
+    </section>
+
+    <section id="project-ledger">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">02 · Project Ledger</p>
+          <h2>用项目制经营台账驱动内部责任</h2>
+        </div>
+        <p>建议把“酒店项目”作为最小经营单元。AI 不直接替代管理判断，而是把销售预测、报价冻结、BOM、订单、出货、库存、采购、退货开票和实际成本串到同一张项目经营台账里。</p>
+      </div>
+
+      <div class="project-board">
+        <div class="project-principle">
+          <span class="tag">Core Design</span>
+          <h3>每个项目都必须回答：预算是多少，实际花了多少，最终赚了多少，差异谁负责。</h3>
+          <p>项目制不是多一张表，而是把内部责任从“部门解释”拉回“项目结果”。销售、方案、供应链、财务、项目经理和售后都围绕同一个项目结果复盘。</p>
+          <div class="project-kpi">
+            <div class="kpi-box"><strong>预算</strong><span>报价冻结、BOM、预计物料、物流、出差、退货、质量费用。</span></div>
+            <div class="kpi-box"><strong>毛利</strong><span>项目收入、实际成本、实际毛利率和被侵蚀的来源。</span></div>
+            <div class="kpi-box"><strong>Gap</strong><span>预算 vs 实际，分解到物料、物流、退货、质量、现场变更。</span></div>
+            <div class="kpi-box"><strong>责任</strong><span>销售预测、报价参数、BOM、采购节奏、交付和售后各自确认。</span></div>
+          </div>
+        </div>
+
+        <div class="ledger" aria-label="项目经营台账示例">
+          <div class="ledger-row ledger-head">
+            <div>项目</div>
+            <div>预算</div>
+            <div>实际成本</div>
+            <div>毛利状态</div>
+            <div>AI 推动动作</div>
+          </div>
+          <div class="ledger-row">
+            <div><strong>酒店智能客控项目 A</strong></div>
+            <div>报价冻结完整</div>
+            <div>物流与退货超支</div>
+            <div class="gap-red">毛利被侵蚀</div>
+            <div>进入项目复盘，修正物流和退货参数</div>
+          </div>
+          <div class="ledger-row">
+            <div><strong>酒店房型配置项目 B</strong></div>
+            <div>BOM 未完全冻结</div>
+            <div>临时补采增加</div>
+            <div class="gap-red">预算失真</div>
+            <div>补齐标准 BOM 和替代物料规则</div>
+          </div>
+          <div class="ledger-row">
+            <div><strong>线束与域控项目 C</strong></div>
+            <div>预测数量稳定</div>
+            <div>出货趋势清晰</div>
+            <div class="gap-green">可谈价</div>
+            <div>形成供应商谈价数据包</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">03 · Operating Architecture</p>
+          <h2>飞书做项目协同入口，ERP 做事实后台，AI 做项目分析层</h2>
+        </div>
+        <p>不建议第一步推倒重做 ERP，也不建议简单认为飞书可以替代所有系统。更稳的路线是先明确系统边界，让项目协同、交易事实和 AI 项目分析各司其职。</p>
+      </div>
+
+      <div class="architecture">
+        <div class="layers" aria-label="AI 落地架构层">
+          <div class="layer">
+            <div class="layer-num">1</div>
+            <div><h3>飞书：项目协同入口</h3><p>审批、订单创建、项目台账、经营日报、AI 社区与 skill 发布。</p></div>
+          </div>
+          <div class="layer">
+            <div class="layer-num">2</div>
+            <div><h3>ERP：交易事实后台</h3><p>采购、库存、出入库、成本、财务、开票和基础资料。</p></div>
+          </div>
+          <div class="layer">
+            <div class="layer-num">3</div>
+            <div><h3>AI：项目分析层</h3><p>串联各项数据，自动对比预算、成本、毛利、gap 和责任动作。</p></div>
+          </div>
+          <div class="layer">
+            <div class="layer-num">4</div>
+            <div><h3>经营会：项目责任闭环</h3><p>按项目看事实、看差异、看责任、看下月动作，而不是听部门流水汇报。</p></div>
+          </div>
+        </div>
+
+        <div class="venn" aria-label="系统边界图">
+          <div class="circle c1">飞书<small>项目协同与经营台账前台</small></div>
+          <div class="circle c2">ERP<small>库存、采购、财务事实后台</small></div>
+          <div class="circle c3">AI<small>项目毛利、预算 gap 与责任复盘</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="scenes">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">04 · Priority Scenarios</p>
+          <h2>第一阶段聚焦 6 个能看清项目经营结果的场景</h2>
+        </div>
+        <p>这些场景不是“好看”的 AI 展示，而是为了让每个项目预算清楚、毛利清楚、gap 来源清楚、责任动作清楚。每个场景都必须沉淀到项目经营台账。</p>
+      </div>
+
+      <div class="grid six">
+        <article class="card scenario">
+          <div>
+            <div class="num">01</div>
+            <h3>项目经营台账与毛利助手</h3>
+            <p>以项目为最小经营单元，看清预算、实际成本、项目毛利和 gap 责任。</p>
+          </div>
+          <div class="flow"><span>项目预算</span><span>实际成本/毛利</span><span>责任闭环</span></div>
+        </article>
+        <article class="card scenario">
+          <div>
+            <div class="num">02</div>
+            <h3>销售预测收敛助手</h3>
+            <p>把销售预测从个人判断变成可复盘、可收敛的项目经营输入。</p>
+          </div>
+          <div class="flow"><span>客户机会/品牌/SKU</span><span>预测 vs 实际</span><span>项目计划修正</span></div>
+        </article>
+        <article class="card scenario">
+          <div>
+            <div class="num">03</div>
+            <h3>报价与 BOM gap 助手</h3>
+            <p>把报价冻结、标准 BOM 与实际成本对比，反向修正报价参数和配置库。</p>
+          </div>
+          <div class="flow"><span>报价冻结/BOM</span><span>成本差异</span><span>参数修正</span></div>
+        </article>
+        <article class="card scenario">
+          <div>
+            <div class="num">04</div>
+            <h3>出货与供应商谈价助手</h3>
+            <p>用项目出货趋势、SKU 消耗和未来项目需求预测形成谈价数据包。</p>
+          </div>
+          <div class="flow"><span>项目出货</span><span>未来需求</span><span>谈价依据</span></div>
+        </article>
+        <article class="card scenario">
+          <div>
+            <div class="num">05</div>
+            <h3>退货与开票整理助手</h3>
+            <p>自动归集订单、项目、出货、退货、发票和金额异常。</p>
+          </div>
+          <div class="flow"><span>订单/退货/发票</span><span>匹配校验</span><span>对账摘要</span></div>
+        </article>
+        <article class="card scenario">
+          <div>
+            <div class="num">06</div>
+            <h3>订单转项目助手</h3>
+            <p>订单确认后自动生成项目启动摘要、BOM 初稿和任务提醒。</p>
+          </div>
+          <div class="flow"><span>销售订单</span><span>项目台账</span><span>任务分派</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="culture">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">05 · Organization Engine</p>
+          <h2>AI 氛围不是培训活动，而是组织能力建设</h2>
+        </div>
+        <p>路线应是自上而下给资源、给方向、给激励；自下而上由业务人员从真实痛点切入。先习惯使用，再沉淀方法，最后用经营效益检验。</p>
+      </div>
+
+      <div class="culture">
+        <div class="dual">
+          <div class="dual-card">
+            <span class="tag">Top-down</span>
+            <h3>管理层给方向、资源和激励</h3>
+            <p>明确 AI 是公司级经营能力建设，提供工具、账号、时间和场景，公开表扬有效案例，让 AI 产出进入经营指标。</p>
+          </div>
+          <div class="dual-card bottom">
+            <span class="tag">Bottom-up</span>
+            <h3>业务人员从真实痛点切入</h3>
+            <p>一线最知道哪些工作重复、耗时、易错。先解决身边问题，再把个人经验沉淀为总结、模板、工具和复盘报告。</p>
+          </div>
+        </div>
+
+        <div class="steps" aria-label="组织 AI 氛围六步路线">
+          <div class="step"><b>01</b><div><strong>普及 AI 应用</strong><span>先让员工敢用、常用，在日常工作里先问 AI。</span></div></div>
+          <div class="step"><b>02</b><div><strong>沉淀模板和工具</strong><span>把个人经验变成总结、模板、工具和复盘报告。</span></div></div>
+          <div class="step"><b>03</b><div><strong>建立 AI 小社区</strong><span>分享案例、共创问题、降低使用门槛。</span></div></div>
+          <div class="step"><b>04</b><div><strong>筛选 AI 小锋队</strong><span>从业务骨干中筛选懂业务、懂数据、会工具的人。</span></div></div>
+          <div class="step"><b>05</b><div><strong>发布内部 AI skill</strong><span>让一个人的好方法，变成十个人都能复用的能力。</span></div></div>
+          <div class="step"><b>06</b><div><strong>用效益验证</strong><span>看预测准确率、整理效率、报价修正和异常提前发现。</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">06 · Roadmap</p>
+          <h2>先跑通项目经营样板，再逐步进入系统化和资产化</h2>
+        </div>
+        <p>第一阶段不要追求全员都会 AI，也不要追求大系统一步到位。真正要追求的是项目预算、实际成本、项目毛利和 gap 责任先被看清楚。</p>
+      </div>
+
+      <div class="roadmap">
+        <article class="phase">
+          <div class="dot">1</div>
+          <h3>普及应用与统一口径</h3>
+          <time>0-30 天</time>
+          <ul>
+            <li>建立 AI 小社区</li>
+            <li>明确 AI 小锋队候选人</li>
+            <li>统一项目预算、报价、BOM、订单、出货、退货开票、实际成本字段</li>
+            <li>选择 3-5 个真实项目试点</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="dot">2</div>
+          <h3>跑通核心场景</h3>
+          <time>31-90 天</time>
+          <ul>
+            <li>筛选 AI 小锋队</li>
+            <li>跑通 6 个优先场景</li>
+            <li>形成第一批内部 AI skill</li>
+            <li>建立项目经营看板和异常日报</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="dot">3</div>
+          <h3>打通事实数据</h3>
+          <time>3-9 个月</time>
+          <ul>
+            <li>明确 ERP 事实数据范围</li>
+            <li>建立外仓、成本、开票同步</li>
+            <li>形成 AI 项目经营分析服务</li>
+            <li>将项目毛利和 gap 输出嵌入经营会</li>
+          </ul>
+        </article>
+        <article class="phase">
+          <div class="dot">4</div>
+          <h3>数据资产与组织升级</h3>
+          <time>9-18 个月</time>
+          <ul>
+            <li>沉淀标准 BOM 数据库</li>
+            <li>沉淀报价参数、项目毛利和谈价模型</li>
+            <li>完善 AI skill 市场</li>
+            <li>培养跨部门经营通才</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="decisions">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">07 · Board-Level Decisions</p>
+          <h2>建议董事长决策的 6 个关键事项</h2>
+        </div>
+        <p>外部咨询汇报不应只给工具建议，更要把需要董事长支持的组织、流程和经营机制讲清楚。</p>
+      </div>
+
+      <div class="grid three">
+        <article class="card decision"><h3>定主线</h3><ul><li>将“以项目制看清经营结果 + 组织 AI 能力建设”定为主线。</li></ul></article>
+        <article class="card decision"><h3>定边界</h3><ul><li>飞书做项目协同入口，ERP 做事实后台，AI 做项目经营分析层。</li></ul></article>
+        <article class="card decision"><h3>定场景</h3><ul><li>第一阶段锁定项目经营台账、销售预测、报价与 BOM gap、谈价、退货开票、订单转项目。</li></ul></article>
+        <article class="card decision"><h3>定组织</h3><ul><li>管理层支持 AI 小社区和 AI 小锋队，让业务骨干参与。</li></ul></article>
+        <article class="card decision"><h3>定会议</h3><ul><li>要求项目毛利、预算 gap 和责任动作进入经营会，形成闭环。</li></ul></article>
+        <article class="card decision"><h3>定责任</h3><ul><li>AI 给建议，业务负责人确认；谁使用，谁确认；谁决策，谁负责。</li></ul></article>
+      </div>
+    </section>
+
+    <section id="risks">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">08 · Failure Modes</p>
+          <h2>最容易失败的地方，恰恰不是 AI 能力</h2>
+        </div>
+        <p>这类项目最容易变成“培训很热闹、工具很多、经营没变化”。因此要提前把失败模式说透。</p>
+      </div>
+      <div class="grid three">
+        <article class="card risk"><h3>把 AI 当成培训活动</h3><p>如果只是组织员工学习工具，短期会热闹，但不会改变经营结果。</p></article>
+        <article class="card risk"><h3>一开始就做大系统</h3><p>数据口径没定，大系统只会把混乱固化。</p></article>
+        <article class="card risk"><h3>只看使用次数</h3><p>使用次数高不等于有效，要看项目预算是否清晰、毛利是否真实、gap 是否归因。</p></article>
+        <article class="card risk"><h3>没有责任确认</h3><p>AI 输出没有负责人确认，就会变成另一种信息噪音。</p></article>
+        <article class="card risk"><h3>经营会打法不变</h3><p>仍然轮流听汇报，AI 只会让汇报材料更好看。</p></article>
+        <article class="card risk emphasis"><h3>真正风险</h3><p>AI 落地失败，通常不是模型不够强，而是没有把项目预算、项目毛利、责任归因和经营会一起改。</p></article>
+      </div>
+    </section>
+
+    <section class="closing" id="closing">
+      <div class="closing-panel">
+        <p class="eyebrow">Final Recommendation</p>
+        <h2>建议把奥特普 AI 落地定义为项目制经营确定性提升工程</h2>
+        <div class="thesis">以项目制经营台账为抓手，用 AI 串联销售预测、报价、BOM、订单、出货、库存、成本、退货和开票，最终看清每个项目的预算、毛利、gap 和责任动作。</div>
+        <p class="footer-note">第一阶段不追求“公司所有人都会 AI”，而追求 3-5 个真实项目先跑通预算清楚、毛利清楚、gap 清楚、责任清楚的项目经营样板。</p>
+      </div>
+    </section>
+  </main>
+
+  <button class="print-button" type="button" onclick="window.print()">打印 / 导出 PDF</button>
+</body>
+</html>
