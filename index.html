@@ -476,50 +476,191 @@
       line-height: 1.45;
     }
 
-    .ledger {
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.9);
+    .ai-dashboard {
+      border: 1px solid var(--ink);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 9px 9px 0 rgba(36, 91, 143, 0.12);
       overflow: hidden;
     }
 
-    .ledger-row {
-      display: grid;
-      grid-template-columns: 1.2fr 0.72fr 0.72fr 0.72fr 1fr;
-      min-height: 72px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .ledger-row:last-child {
-      border-bottom: 0;
-    }
-
-    .ledger-row > div {
-      padding: 16px 14px;
-      border-right: 1px solid var(--line);
+    .dashboard-head {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      color: #4b5563;
-      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-      font-size: 13px;
-      line-height: 1.45;
-    }
-
-    .ledger-row > div:last-child {
-      border-right: 0;
-    }
-
-    .ledger-head > div {
-      min-height: 58px;
+      gap: 16px;
+      padding: 18px 20px;
       background: var(--ink);
       color: white;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
       font-weight: 800;
     }
 
-    .ledger-row strong {
+    .dashboard-head span {
+      font-size: 18px;
+    }
+
+    .dashboard-head small {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .dash-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-bottom: 1px solid var(--line);
+    }
+
+    .dash-metric {
+      padding: 16px;
+      border-right: 1px solid var(--line);
+      min-height: 106px;
+    }
+
+    .dash-metric:last-child {
+      border-right: 0;
+    }
+
+    .dash-metric b {
+      display: block;
+      color: var(--blue);
+      font-family: Georgia, serif;
+      font-size: 34px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .dash-metric span,
+    .dash-metric small {
+      display: block;
+      color: var(--muted);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.45;
+    }
+
+    .dash-metric span {
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .dash-metric small {
+      margin-top: 4px;
+      font-size: 12px;
+    }
+
+    .ai-alerts {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .ai-alert {
+      display: grid;
+      grid-template-columns: minmax(135px, 0.8fr) minmax(150px, 0.9fr) minmax(190px, 1.2fr);
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: rgba(251, 250, 247, 0.9);
+    }
+
+    .ai-alert.is-risk {
+      border-left: 5px solid var(--red);
+    }
+
+    .ai-alert.is-watch {
+      border-left: 5px solid var(--gold);
+    }
+
+    .ai-alert.is-ready {
+      border-left: 5px solid var(--green);
+    }
+
+    .project-cell small,
+    .signal-cell small,
+    .action-cell small {
+      display: block;
+      color: var(--muted);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .project-cell strong {
+      display: block;
+      margin-top: 8px;
       color: var(--ink);
       font-family: "Noto Serif SC", "Songti SC", serif;
-      font-size: 17px;
-      line-height: 1.35;
+      font-size: 18px;
+      line-height: 1.28;
+    }
+
+    .project-cell span {
+      display: inline-flex;
+      margin-top: 10px;
+      padding: 4px 8px;
+      border: 1px solid var(--line);
+      color: #4b5563;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .signal-cell {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .signal-card {
+      padding: 10px;
+      background: white;
+      border: 1px solid var(--line);
+    }
+
+    .signal-card b {
+      display: block;
+      margin-top: 6px;
+      color: var(--red);
+      font-family: Georgia, serif;
+      font-size: 22px;
+      line-height: 1.05;
+    }
+
+    .ai-alert.is-ready .signal-card b {
+      color: var(--green);
+    }
+
+    .action-cell p {
+      margin: 7px 0 8px;
+      color: #4b5563;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      line-height: 1.52;
+    }
+
+    .owner-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 8px;
+      background: rgba(36, 91, 143, 0.08);
+      color: var(--blue);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .dashboard-foot {
+      padding: 14px 16px 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      line-height: 1.55;
+      background: rgba(255, 255, 255, 0.72);
     }
 
     .gap-red {
@@ -948,11 +1089,8 @@
       .pain-list {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-      .ledger {
-        overflow-x: auto;
-      }
-      .ledger-row {
-        min-width: 820px;
+      .ai-alert {
+        grid-template-columns: 1fr;
       }
       .grid.three,
       .grid.six,
@@ -1003,6 +1141,21 @@
       }
       .project-kpi {
         grid-template-columns: 1fr;
+      }
+      .dash-metrics,
+      .signal-cell {
+        grid-template-columns: 1fr;
+      }
+      .dash-metric {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .dash-metric:last-child {
+        border-bottom: 0;
+      }
+      .dashboard-head {
+        align-items: flex-start;
+        flex-direction: column;
       }
       .circle {
         position: static;
@@ -1160,35 +1313,71 @@
           </div>
         </div>
 
-        <div class="ledger" aria-label="项目经营台账示例">
-          <div class="ledger-row ledger-head">
-            <div>项目</div>
-            <div>预算</div>
-            <div>实际成本</div>
-            <div>毛利状态</div>
-            <div>AI 推动动作</div>
+        <div class="ai-dashboard" aria-label="AI 项目经营大盘示例">
+          <div class="dashboard-head">
+            <span>AI 项目经营大盘</span>
+            <small>Budget · Cost · Margin · Action</small>
           </div>
-          <div class="ledger-row">
-            <div><strong>酒店智能客控项目 A</strong></div>
-            <div>报价冻结完整</div>
-            <div>物流、退回与安装返工超支</div>
-            <div class="gap-red">毛利被侵蚀</div>
-            <div>进入项目复盘，修正供应链、交付和安装方式</div>
+          <div class="dash-metrics">
+            <div class="dash-metric"><b>2</b><span>高风险项目</span><small>毛利或预算已偏离，需要进入经营会。</small></div>
+            <div class="dash-metric"><b>¥18.4万</b><span>退回/返工金额</span><small>按项目、SKU、供应商和安装环节归集。</small></div>
+            <div class="dash-metric"><b>3</b><span>待确认责任动作</span><small>供应链、项目经理、售后分别确认。</small></div>
           </div>
-          <div class="ledger-row">
-            <div><strong>酒店房型配置项目 B</strong></div>
-            <div>BOM 未完全冻结</div>
-            <div>临时补采增加</div>
-            <div class="gap-red">预算失真</div>
-            <div>补齐标准 BOM 和替代物料规则</div>
+
+          <div class="ai-alerts">
+            <div class="ai-alert is-risk">
+              <div class="project-cell">
+                <small>Project A</small>
+                <strong>酒店智能客控项目</strong>
+                <span>报价已冻结</span>
+              </div>
+              <div class="signal-cell">
+                <div class="signal-card"><small>毛利偏离</small><b>-6.8%</b></div>
+                <div class="signal-card"><small>异常金额</small><b>¥12.6万</b></div>
+              </div>
+              <div class="action-cell">
+                <small>AI 提示</small>
+                <p>物流、退回与安装返工超支，建议进入项目复盘，修正交付节奏、包装发运和现场安装方式。</p>
+                <span class="owner-pill">责任：项目经理 + 供应链</span>
+              </div>
+            </div>
+
+            <div class="ai-alert is-watch">
+              <div class="project-cell">
+                <small>Project B</small>
+                <strong>酒店房型配置项目</strong>
+                <span>BOM 未冻结</span>
+              </div>
+              <div class="signal-cell">
+                <div class="signal-card"><small>补采次数</small><b>4 次</b></div>
+                <div class="signal-card"><small>预算状态</small><b>失真</b></div>
+              </div>
+              <div class="action-cell">
+                <small>AI 提示</small>
+                <p>房型、SKU 和替代物料规则不完整，建议先补齐标准 BOM，再允许进入下一轮报价。</p>
+                <span class="owner-pill">责任：方案 + 报价</span>
+              </div>
+            </div>
+
+            <div class="ai-alert is-ready">
+              <div class="project-cell">
+                <small>Project C</small>
+                <strong>线束与域控项目</strong>
+                <span>出货趋势清晰</span>
+              </div>
+              <div class="signal-cell">
+                <div class="signal-card"><small>月度出货</small><b>稳定</b></div>
+                <div class="signal-card"><small>谈价机会</small><b>可启动</b></div>
+              </div>
+              <div class="action-cell">
+                <small>AI 提示</small>
+                <p>近 6 个月 SKU 趋势和未来需求较稳定，建议生成供应商谈价数据包。</p>
+                <span class="owner-pill">责任：采购 + 财务</span>
+              </div>
+            </div>
           </div>
-          <div class="ledger-row">
-            <div><strong>线束与域控项目 C</strong></div>
-            <div>预测数量稳定</div>
-            <div>出货趋势清晰</div>
-            <div class="gap-green">可谈价</div>
-            <div>形成供应商谈价数据包</div>
-          </div>
+
+          <div class="dashboard-foot">经营会不再听部门流水汇报，而是按项目追问：差异金额是多少、原因在哪里、谁确认、下次如何避免。</div>
         </div>
       </div>
     </section>
