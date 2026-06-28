@@ -933,6 +933,117 @@
       font-size: 13px;
     }
 
+    .org-native {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 18px;
+    }
+
+    .barbell-card,
+    .squad-card {
+      border: 1px solid var(--ink);
+      background: rgba(255, 255, 255, 0.92);
+      padding: 24px;
+      box-shadow: 7px 7px 0 rgba(36, 91, 143, 0.11);
+    }
+
+    .barbell-card h3,
+    .squad-card h3 {
+      margin: 0 0 16px;
+      font-size: 24px;
+      line-height: 1.18;
+    }
+
+    .barbell-track {
+      display: grid;
+      grid-template-columns: 1fr 48px 1fr;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .barbell-end {
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      min-height: 148px;
+    }
+
+    .barbell-end b {
+      display: block;
+      color: var(--blue);
+      font-family: Georgia, serif;
+      font-size: 42px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .barbell-end:nth-child(3) b {
+      color: var(--red);
+    }
+
+    .barbell-end strong,
+    .squad-item strong {
+      display: block;
+      color: var(--ink);
+      font-size: 18px;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .barbell-end span,
+    .squad-item span,
+    .org-note {
+      color: var(--muted);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .barbell-mid {
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-family: Georgia, serif;
+      font-size: 34px;
+      font-weight: 900;
+    }
+
+    .org-note {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .squad-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .squad-item {
+      min-height: 150px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .squad-item b {
+      display: inline-flex;
+      margin-bottom: 12px;
+      padding: 4px 8px;
+      background: var(--ink);
+      color: white;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .squad-card .org-note {
+      color: var(--red);
+      font-weight: 800;
+    }
+
     .roadmap {
       position: relative;
       display: grid;
@@ -1013,6 +1124,8 @@
     .decision:nth-child(4) { border-left-color: var(--red); }
     .decision:nth-child(5) { border-left-color: var(--green); }
     .decision:nth-child(6) { border-left-color: var(--ink); }
+    .decision:nth-child(7) { border-left-color: var(--blue); }
+    .decision:nth-child(8) { border-left-color: var(--red); }
 
     .risk {
       min-height: 190px;
@@ -1079,6 +1192,7 @@
       .section-head,
       .architecture,
       .culture,
+      .org-native,
       .project-board,
       .process-board {
         grid-template-columns: 1fr;
@@ -1143,8 +1257,13 @@
         grid-template-columns: 1fr;
       }
       .dash-metrics,
-      .signal-cell {
+      .signal-cell,
+      .barbell-track,
+      .squad-list {
         grid-template-columns: 1fr;
+      }
+      .barbell-mid {
+        display: none;
       }
       .dash-metric {
         border-right: 0;
@@ -1233,8 +1352,8 @@
       <div>
         <p class="eyebrow">External Consulting Brief · 2026-06-25</p>
         <h1 id="report-title">以项目制驱动责任，用 AI 看清每个项目经营结果</h1>
-        <p class="lead">本报告面向奥特普董事长汇报。外部咨询判断：奥特普当前真正要补的不是单点 AI 能力，而是以项目为最小经营单元，看清每个项目预算、实际成本、项目毛利和 gap 责任。</p>
-        <div class="thesis">AI 只是加速器，核心抓手是项目制经营台账；真正要改的是数据口径、责任机制和经营会打法。</div>
+        <p class="lead">本报告面向奥特普董事长汇报。外部咨询判断：奥特普当前真正要补的不是单点 AI 能力，而是以项目为最小经营单元，看清每个项目预算、实际成本、项目毛利和 gap 责任，并减少组织里的等待节点。</p>
+        <div class="thesis">AI 只是加速器，核心抓手是项目制经营台账；真正要改的是数据口径、责任机制、经营会打法和组织协作方式。</div>
         <div class="hero-meta" aria-label="报告元信息">
           <span class="meta-chip">汇报对象：董事长</span>
           <span class="meta-chip">定位：外部咨询建议</span>
@@ -1555,7 +1674,7 @@
           <p class="eyebrow">07 · Organization Engine</p>
           <h2>AI 氛围不是培训活动，而是组织能力建设</h2>
         </div>
-        <p>路线应是自上而下给资源、给方向、给激励；自下而上由业务人员从真实痛点切入。先习惯使用，再沉淀方法，最后用经营效益检验。</p>
+        <p>路线应是自上而下给资源、给方向、给激励；自下而上由业务人员从真实痛点切入。真正的 AI 原生，不看用了多少工具，而看等待节点、串行节点和传声筒节点是否变少。</p>
       </div>
 
       <div class="culture">
@@ -1574,11 +1693,55 @@
 
         <div class="steps" aria-label="组织 AI 氛围六步路线">
           <div class="step"><b>01</b><div><strong>普及 AI 应用</strong><span>先让员工敢用、常用，在日常工作里先问 AI。</span></div></div>
-          <div class="step"><b>02</b><div><strong>沉淀模板和工具</strong><span>把个人经验变成总结、模板、工具和复盘报告。</span></div></div>
+          <div class="step"><b>02</b><div><strong>AI 原生案例赛</strong><span>看真实提效、减少几个等待节点、能否被复用。</span></div></div>
           <div class="step"><b>03</b><div><strong>建立 AI 小社区</strong><span>分享案例、共创问题、降低使用门槛。</span></div></div>
-          <div class="step"><b>04</b><div><strong>筛选 AI 小锋队</strong><span>从业务骨干中筛选懂业务、懂数据、会工具的人。</span></div></div>
+          <div class="step"><b>04</b><div><strong>筛选 AI 小锋队</strong><span>形成懂 AI、懂业务、懂组织的变革推进组。</span></div></div>
           <div class="step"><b>05</b><div><strong>发布内部 AI skill</strong><span>让一个人的好方法，变成十个人都能复用的能力。</span></div></div>
-          <div class="step"><b>06</b><div><strong>用效益验证</strong><span>看预测准确率、整理效率、报价修正和异常提前发现。</span></div></div>
+          <div class="step"><b>06</b><div><strong>让旧节点退出主链路</strong><span>从每次必经，变成必要时介入。</span></div></div>
+        </div>
+      </div>
+
+      <div class="org-native" aria-label="AI 原生组织能力模型">
+        <div class="barbell-card">
+          <span class="tag">Barbell Effect</span>
+          <h3>专家深挖深度，通才放大广度</h3>
+          <div class="barbell-track">
+            <div class="barbell-end">
+              <b>深</b>
+              <strong>专家用 AI 深挖专业深度</strong>
+              <span>报价、BOM、质量、供应链、项目毛利，用 AI 做更深的分析、复盘和规则沉淀。</span>
+            </div>
+            <div class="barbell-mid">×</div>
+            <div class="barbell-end">
+              <b>广</b>
+              <strong>通才用 AI 放大视野广度</strong>
+              <span>跨销售、项目、供应链、财务、售后理解经营结果，推动问题闭环。</span>
+            </div>
+          </div>
+          <div class="org-note">核心不是人人会提示词，而是主动驾驭技术、主动闭环问题、主动把方法沉淀成组织能力。</div>
+        </div>
+
+        <div class="squad-card">
+          <span class="tag">AI Squad</span>
+          <h3>AI 小锋队必须有三种能力</h3>
+          <div class="squad-list">
+            <div class="squad-item">
+              <b>AI</b>
+              <strong>懂 AI</strong>
+              <span>知道何时用通用大模型、工作流、agent，何时根本不需要 AI。</span>
+            </div>
+            <div class="squad-item">
+              <b>Business</b>
+              <strong>懂业务</strong>
+              <span>能听懂一线痛点，分清哪里真的慢、哪里只是看起来慢。</span>
+            </div>
+            <div class="squad-item">
+              <b>Org</b>
+              <strong>懂组织</strong>
+              <span>能处理 AI 改变串行节点后，对分工、权责和流程的影响。</span>
+            </div>
+          </div>
+          <div class="org-note">小锋队第一任务不是做系统，而是找到最值得打穿的串行节点，跑出项目经营样板。</div>
         </div>
       </div>
     </section>
@@ -1599,6 +1762,7 @@
           <time>0-30 天</time>
           <ul>
             <li>建立 AI 小社区</li>
+            <li>启动 AI 原生案例赛</li>
             <li>明确 AI 小锋队候选人</li>
             <li>统一项目预算、报价、BOM、订单、出货、退回记录、抱怨原因、退回金额、开票、实际成本字段</li>
             <li>盘点现有流程冗余、漏洞和缺失责任人的环节</li>
@@ -1614,6 +1778,7 @@
             <li>跑通 6 个优先场景</li>
             <li>把 3-5 条高频有效流程嵌入飞书审批和项目任务</li>
             <li>形成第一批内部 AI skill</li>
+            <li>推动旧节点从每次必经变成必要时介入</li>
             <li>建立项目经营看板和异常日报</li>
           </ul>
         </article>
@@ -1638,7 +1803,7 @@
             <li>沉淀报价参数、项目毛利和谈价模型</li>
             <li>沉淀有效流程库和流程审计机制</li>
             <li>完善 AI skill 市场</li>
-            <li>培养跨部门经营通才</li>
+            <li>形成专家深度和通才广度的人才梯队</li>
           </ul>
         </article>
       </div>
@@ -1648,7 +1813,7 @@
       <div class="section-head">
         <div>
           <p class="eyebrow">09 · Board-Level Decisions</p>
-          <h2>建议董事长决策的 7 个关键事项</h2>
+          <h2>建议董事长决策的 8 个关键事项</h2>
         </div>
         <p>外部咨询汇报不应只给工具建议，更要把需要董事长支持的组织、流程和经营机制讲清楚。</p>
       </div>
@@ -1658,7 +1823,8 @@
         <article class="card decision"><h3>定边界</h3><ul><li>飞书做项目协同入口，ERP 做事实后台，AI 做项目经营分析层。</li></ul></article>
         <article class="card decision"><h3>定场景</h3><ul><li>第一阶段锁定项目经营台账、销售预测、报价与 BOM gap、谈价、开业前/售后退回分析、订单转项目。</li></ul></article>
         <article class="card decision"><h3>定流程</h3><ul><li>要求流程简约有效，现有流程要审冗余、审漏洞、审责任人，并嵌入飞书执行。</li></ul></article>
-        <article class="card decision"><h3>定组织</h3><ul><li>管理层支持 AI 小社区和 AI 小锋队，让业务骨干参与。</li></ul></article>
+        <article class="card decision"><h3>定组织</h3><ul><li>AI 小锋队获得授权，形成懂 AI、懂业务、懂组织的变革推进组。</li></ul></article>
+        <article class="card decision"><h3>定 CEO 动作</h3><ul><li>亲自使用 AI、授权护航、让资源向真实跑出结果的团队倾斜。</li></ul></article>
         <article class="card decision"><h3>定会议</h3><ul><li>要求项目毛利、预算 gap、流程超期和责任动作进入经营会。</li></ul></article>
         <article class="card decision"><h3>定责任</h3><ul><li>AI 给建议，业务负责人确认；谁使用，谁确认；谁决策，谁负责。</li></ul></article>
       </div>
@@ -1673,13 +1839,13 @@
         <p>这类项目最容易变成“培训很热闹、工具很多、经营没变化”。因此要提前把失败模式说透。</p>
       </div>
       <div class="grid three">
-        <article class="card risk"><h3>把 AI 当成培训活动</h3><p>如果只是组织员工学习工具，短期会热闹，但不会改变经营结果。</p></article>
+        <article class="card risk"><h3>把 AI 当成培训活动</h3><p>如果只是组织员工学习工具，短期会热闹，但不会减少等待节点。</p></article>
         <article class="card risk"><h3>一开始就做大系统</h3><p>数据口径没定，大系统只会把混乱固化。</p></article>
         <article class="card risk"><h3>把流程当答案</h3><p>流程写得越复杂，越容易变成形式主义；流程必须服务客户价值和项目结果。</p></article>
         <article class="card risk"><h3>只看使用次数</h3><p>使用次数高不等于有效，要看项目预算是否清晰、毛利是否真实、gap 是否归因。</p></article>
         <article class="card risk"><h3>没有责任确认</h3><p>流程没有责任人，AI 输出没有负责人确认，都会变成另一种信息噪音。</p></article>
-        <article class="card risk"><h3>经营会打法不变</h3><p>仍然轮流听汇报，AI 只会让汇报材料更好看。</p></article>
-        <article class="card risk emphasis"><h3>真正风险</h3><p>AI 落地失败，通常不是模型不够强，而是没有把项目预算、项目毛利、简约流程、责任归因和经营会一起改。</p></article>
+        <article class="card risk"><h3>资源分配不变</h3><p>如果仍然奖励低效协作和层层等待，AI 只会挂在旧组织上。</p></article>
+        <article class="card risk emphasis"><h3>真正风险</h3><p>AI 落地失败，通常不是模型不够强，而是没有把项目预算、项目毛利、简约流程、责任归因、经营会和组织授权一起改。</p></article>
       </div>
     </section>
 
@@ -1688,7 +1854,7 @@
         <p class="eyebrow">Final Recommendation</p>
         <h2>建议把奥特普 AI 落地定义为项目制经营确定性提升工程</h2>
         <div class="thesis">以项目制经营台账为抓手，用 AI 串联销售预测、报价、BOM、订单、出货、库存、成本、开业前和售后退回、客户及总包抱怨、开票和简约流程，最终看清每个项目的预算、毛利、gap、流程状态和责任动作。</div>
-        <p class="footer-note">第一阶段不追求“公司所有人都会 AI”，而追求 3-5 个真实项目先跑通预算清楚、毛利清楚、gap 清楚、流程有效、责任清楚的项目经营样板。</p>
+        <p class="footer-note">第一阶段不追求“公司所有人都会 AI”，而追求 3-5 个真实项目先跑通预算清楚、毛利清楚、gap 清楚、流程有效、责任清楚，并减少一批真实等待节点。</p>
       </div>
     </section>
   </main>
